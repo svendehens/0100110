@@ -28,6 +28,10 @@
     "dependencies": {
         "@tinymce/tinymce-vue": "^4.0.4",
         "element-plus": "^1.1.0-beta.19",
+        "jquery": "^3.6.0",
+        "jquery-ui": "^1.12.1",
+        "jquery-ui-dist": "^1.12.1",
+        "jsplumb": "^2.15.6",
         "unplugin-element-plus": "^0.1.0",
         "unplugin-vue-components": "^0.15.6"
     }

@@ -76,7 +76,7 @@
 				<div class="max-h-96 bg-box shadow-md sm:rounded-lg p-2 md:p-4">
 					<div class="py-4 flex flex-col space-y-4">
 						<text-input
-                            v-model="form.author"
+							v-model="form.author"
 							class="w-full"
 							label="Author"
 							placeholder="Author"
@@ -181,7 +181,7 @@ export default {
 		TinyEditor,
 		PrimaryButton,
 		SecondaryButton,
-		DangerButton
+		DangerButton,
 	},
 	props: {
 		errors: [Object, String],

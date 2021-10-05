@@ -18,6 +18,13 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('postcss-import'),
         require('tailwindcss'),
     ])
+    .js('resources/js/Machine/vendor.js', 'public/js/machine')
+    .combine([
+        'resources/js/Machine/utils.js',
+        'resources/js/Machine/app.js',
+        'resources/js/Machine/functions.js'
+    ], 'public/js/machine/app.js')
+    .copy('resources/js/Machine/jquery.window.min.js', 'public/js/machine')
     .postCss('resources/css/machine.css', 'public/css', [
         require('postcss-import'),
     ])
