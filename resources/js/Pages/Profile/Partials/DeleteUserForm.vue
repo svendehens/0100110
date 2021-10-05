@@ -57,7 +57,8 @@
     import JetActionSection from '@/Jetstream/ActionSection.vue'
     import JetDialogModal from '@/Jetstream/DialogModal.vue'
     import JetDangerButton from '@/Jetstream/DangerButton.vue'
-    import JetInput from '@/Jetstream/Input.vue'
+    // import JetInput from '@/Jetstream/Input.vue'
+    import JetInput from '@/Shared/Form/TextInput'
     import JetInputError from '@/Jetstream/InputError.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
 

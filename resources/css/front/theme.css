@@ -1,0 +1,18 @@
+body {
+    background-color: rgba(40, 57, 68, 1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  border-bottom: 1px dashed;
+}
+
+a[href*="//"]:not([href*="stefangovaart.xyz"]):not([href*="stefanapp.test"]):not(.no-external)::after
+{
+    content: "";
+    background: no-repeat bottom url("/storage/assets/link.svg");
+    padding-right: 1em;
+    margin: 0 2px;
+}
+

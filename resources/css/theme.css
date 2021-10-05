@@ -1,0 +1,48 @@
+:root {
+  --color-bg-main: rgba(244, 245, 247, 1);
+  --color-bg-nav: rgba(255, 255, 255, 1);
+  --color-bg-box: rgba(255, 255, 255, 1);
+
+  --color-bg-navhover: transparent;
+  --color-text-navhover: #303133;
+
+  --color-bg-primary: #0252cc;
+  --color-bg-secondary: #ffc402;
+  --color-bg-inverse: rgba(39, 48, 63, 1);
+
+  --color-bg-warning: rgb(253, 245, 230, 0.7);
+
+  --color-text-default: #303133;
+  --color-text-active: #303133;
+  --color-text-inactive: #909399;
+  --color-text-primary:#303133;
+  --color-text-secondary: #755f17; /* Use on Hover, or Placeholder.. */
+
+  --border-active:#409eff;
+
+  /* Front */
+  --color-bg-front-main : rgb(238, 238, 238);
+}
+
+/** purgecss start ignore */
+.theme-dark {
+  --color-bg-main: rgba(39, 48, 63, 1);
+  --color-bg-nav: rgba(54, 65, 82, 1);
+  --color-bg-box: rgba(54, 65, 82, 1);
+  --color-bg-navhover: rgba(39, 48, 63, 1);
+  --color-text-navhover: rgb(255, 255, 255);
+
+  --color-bg-primary: #847543;
+  --color-bg-secondary: #dcd0c0;
+  --color-bg-inverse: rgba(244, 245, 247, 1);
+
+  --color-bg-warning: rgba(253, 230, 252, 0.70);
+
+  --color-text-default: rgb(255, 255, 255);
+  --color-text-active: rgb(255, 208, 75);
+  --color-text-inactive: rgb(255, 255, 255);
+  --color-text-primary: rgb(255, 255, 255);
+  --color-text-secondary: #927e7e;
+
+  --border-active: rgb(255, 208, 75);
+}

@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+
+use App\Http\Controllers\Front\FrontController;
+
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +18,22 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+/**** FRONT ****/
+Route::name('front.')->group(function () {
+
+    // Front HOME
+    Route::get('/', [FrontController::class, 'index'])->name('home');
+
+    // Front TEST page
+    Route::get('/text/{project:slug}', [FrontController::class, 'text'])->name('text');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+/**** ADMIN ****/
+Route::middleware(['auth:sanctum', 'verified', 'remember'])->prefix('admin')->name('admin.')->group(function () {
+
+    // Admin PROJECT
+    Route::resource('project', ProjectController::class);
+
+    // Admin SECTION
+    Route::resource('section', SectionController::class);
+});

@@ -1,3 +1,23 @@
 @import 'tailwindcss/base';
+@import 'reset';
+@import "theme";
+
 @import 'tailwindcss/components';
+@import "buttons";
+@import "form";
+
 @import 'tailwindcss/utilities';
+
+@layer utilities {
+  .h-1\/12{
+      height: 8.33333%;
+  }
+
+  .w-10\/12 {
+      height: 83.33333%
+  }
+
+  .h-11\/12{
+      height: 91.66667%
+  }
+}

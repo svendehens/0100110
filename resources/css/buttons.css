@@ -1,0 +1,302 @@
+.btn{
+  line-height: 1.499;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
+    -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  touch-action: manipulation;
+  height: 32px;
+  padding: 0 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border-color: #d9d9d9;
+}
+
+/* .btn:hover,
+.btn:focus {
+  color: #40a9ff;
+  background-color: #fff;
+  border-color: #40a9ff;
+  cursor: pointer;
+} */
+
+/* Btn Sizes */
+.btn-lg {
+  height: 40px;
+  padding: 0 15px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.btn-sm {
+  height: 24px;
+  padding: 0 7px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+/* Button */
+
+.btn > a:only-child {
+  color: currentColor;
+}
+.btn > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn:hover > a:only-child,
+.btn:focus > a:only-child {
+  color: currentColor;
+}
+.btn:hover > a:only-child::after,
+.btn:focus > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn:active > a:only-child,
+.btn.active > a:only-child {
+  color: currentColor;
+}
+.btn:active > a:only-child::after,
+.btn.active > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+
+
+/* Btn Primary */
+
+.btn-primary {
+  color: #fff;
+  background-color: #1890ff;
+  border-color: #1890ff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+
+.btn-primary > a:only-child {
+  color: currentColor;
+}
+.btn-primary > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+.btn-primary:hover > a:only-child {
+  color: currentColor;
+}
+.btn-primary:hover > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn-primary:active,
+.btn-primary.active {
+  color: #fff;
+  background-color: #096dd9;
+  border-color: #096dd9;
+}
+.btn-primary:active > a:only-child,
+.btn-primary.active > a:only-child {
+  color: currentColor;
+}
+.btn-primary:active > a:only-child::after,
+.btn-primary.active > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+
+/* Btn Ghost */
+
+.btn-ghost {
+  color: var(--color-text-default);
+  background-color: transparent;
+  border-color: #d9d9d9;
+}
+.btn-ghost > a:only-child {
+  color: currentColor;
+}
+.btn-ghost > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn-ghost:hover,
+.btn-ghost:focus {
+  color: #40a9ff;
+  background-color: transparent;
+  border-color: #40a9ff;
+}
+.btn-ghost:hover > a:only-child,
+.btn-ghost:focus > a:only-child {
+  color: currentColor;
+}
+.btn-ghost:hover > a:only-child::after,
+.btn-ghost:focus > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn-ghost:active,
+.btn-ghost.active {
+  color: #096dd9;
+  background-color: transparent;
+  border-color: #096dd9;
+}
+.btn-ghost:active > a:only-child,
+.btn-ghost.active > a:only-child {
+  color: currentColor;
+}
+.btn-ghost:active > a:only-child::after,
+.btn-ghost.active > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+
+
+/* Btn Danger */
+
+.btn-danger {
+  color: #fff;
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+.btn-danger > a:only-child {
+  color: currentColor;
+}
+.btn-danger > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn-danger:hover,
+.btn-danger:focus {
+  color: #fff;
+  background-color: #ff7875;
+  border-color: #ff7875;
+}
+.btn-danger:hover > a:only-child,
+.btn-danger:focus > a:only-child {
+  color: currentColor;
+}
+.btn-danger:hover > a:only-child::after,
+.btn-danger:focus > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+.btn-danger:active,
+.btn-danger.active {
+  color: #fff;
+  background-color: #d9363e;
+  border-color: #d9363e;
+}
+.btn-danger:active > a:only-child,
+.btn-danger.active > a:only-child {
+  color: currentColor;
+}
+.btn-danger:active > a:only-child::after,
+.btn-danger.active > a:only-child::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  content: '';
+}
+
+
+/* Spinner */
+
+.btn-spinner,
+.btn-spinner:after {
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.btn-spinner {
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: .2em solid white;
+  border-right: .2em solid white;
+  border-bottom: .2em solid white;
+  border-left: .2em solid transparent;
+  transform: translateZ(0);
+  animation: spinning 1s infinite linear;
+}
+
+@keyframes spinning {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}

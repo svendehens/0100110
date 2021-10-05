@@ -11,10 +11,15 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.disableSuccessNotifications();
+
 mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
+    ])
+    .postCss('resources/css/machine.css', 'public/css', [
+        require('postcss-import'),
     ])
     .webpackConfig(require('./webpack.config'));
 
