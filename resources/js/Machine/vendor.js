@@ -4,4 +4,4 @@ window.$ = $;
 
 import 'jquery-ui';
 
-import jsplumb from 'jsplumb'
+// import jsplumb from 'jsplumb'

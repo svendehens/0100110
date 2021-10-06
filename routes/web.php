@@ -3,9 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\Front\MarkovController;
+use App\Http\Controllers\Front\SearchAllController;
+use App\Http\Controllers\Front\SearchController;
 
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SectionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +31,11 @@ Route::name('front.')->group(function () {
     // Front TEST page
     Route::get('/text/{project:slug}', [FrontController::class, 'text'])->name('text');
 });
+
+/**** API ****/
+Route::get('/search', [SearchController::class, 'index']);
+Route::get('/markov', [MarkovController::class, 'index']);
+Route::get('/search-all', [SearchAllController::class, 'index']);
 
 /**** ADMIN ****/
 Route::middleware(['auth:sanctum', 'verified', 'remember'])->prefix('admin')->name('admin.')->group(function () {

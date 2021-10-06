@@ -330,8 +330,8 @@ input {
 }
 
 .write_container {
-    /*border: 1px solid #444;*/
     z-index: 3000;
+    background: white;
 }
 
 .window_panel .window_frame .write_container {
@@ -481,13 +481,13 @@ h2.suggestion {
     color: #555;
 }
 
-._jsPlumb_endpoint {
+._jsPlumb_endpoint, .jtk-endpoint {
     z-index: 4000;
     cursor: move;
     opacity: 0;
 }
 
-._jsPlumb_endpoint:hover {
+._jsPlumb_endpoint:hover, .jtk-endpoint:hover {
     opacity: 0.1;
 }
 
@@ -500,7 +500,7 @@ h2.suggestion {
 }
 
 .blue_text {
-    color: #00f;
+    color: #00f!important;
     font-size: 11px;
 }
 
@@ -538,6 +538,7 @@ h2.suggestion {
 }
 
 .wikify_slider {
+    display: none!important; /* Not working */
     width: 100px;
     margin: 3px 0 3px 0px;
 }

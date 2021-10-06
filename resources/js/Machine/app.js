@@ -1,9 +1,7 @@
 // READY
-
 $(function () {
-    $("#test").text("The DOM is now loaded and can be manipulated.");
 
-    // triggerHintImage(TIMING_HINT_IMAGE);
+    triggerHintImage(TIMING_HINT_IMAGE);
 
     if (browser.name == "MSIE" || browser.name == "Edge") {
         alert("machine for making sense has been designed and tested on Firefox and Chrome");
@@ -11,16 +9,15 @@ $(function () {
 
     $('#search_box').val('');
 
-    // openFirstBox();
     openWriteBox();
     typeInSearch();
 
-    $('.search_box').trigger('click'); // focus
-    // $('.search_box').trigger('select'); // select
+    $('.search_box').trigger('focus'); // focus
+    $('.search_box').trigger('select'); // select
 
+    // initJsPlumb()
 
     jsPlumb.ready(function () {
-
         jsPlumb.Defaults.Container = $("body");
         jsPlumb.importDefaults({
             ConnectorZIndex: 4000,
@@ -31,11 +28,10 @@ $(function () {
         });
 
         jsPlumb.bind("jsPlumbConnection", function (info) {
-
             $('.window_frame #hint_message').fadeOut(500);
             $('.window_frame #hint_message').text('');
             synths_made++;
-            console.log(synths_made)
+
             const sourceTxt = info.source.parent().text();
             const targetTxt = info.target.parent().text();
             const sourceWindow = info.source.parents('.window_panel');//parent().parent().parent().parent();
@@ -51,47 +47,47 @@ $(function () {
                 nonblue_synths_made++;
                 const sourceWord = info.source.text();
                 const targetWord = info.target.text();
-                // $.getJSON("search_all2.php?keyword=" + sourceWord + "&max=10", function (data1) {
+                $.getJSON("/search?keyword=" + sourceWord + "&max=10", function (data1) {
 
-                //     $.getJSON("search_all2.php?keyword=" + targetWord + "&max=10", function (data2) {
-                //         console.log('targetword data2', data2)
-                //         if (result1 == undefined || result2 == undefined) {
-                //             // console.log('local synth');
-                //             if (sourceTxt.length > 2000) {
-                //                 sourceTxt = sourceTxt.substring(0, 2000);
-                //                 // console.log(sourceTxt);
-                //             }
-                //             var len = sourceTxt.length < 200 ? sourceTxt.length : sourceTxt.length * 0.6;
-                //             $.ajax({
-                //                 url: 'markov.php?order=5&begining=' + sourceWord + '&length=' + len + '&content=' + sourceTxt,
-                //                 context: document.body
-                //             }).done(function (data) {
-                //                 generateMarkov(data, x, y, sourceWord, targetWord, info);
-                //             });
-                //         }
-                //         else {
-                //             const result1 = data1[Math.floor(Math.random() * data1.length)];
-                //             const result2 = data2[Math.floor(Math.random() * data2.length)];
+                    $.getJSON("/search?keyword=" + targetWord + "&max=10", function (data2) {
+                        console.log('targetword data2', data2)
+                        if (result1 == undefined || result2 == undefined) {
+                            // console.log('local synth');
+                            if (sourceTxt.length > 2000) {
+                                sourceTxt = sourceTxt.substring(0, 2000);
+                                // console.log(sourceTxt);
+                            }
+                            var len = sourceTxt.length < 200 ? sourceTxt.length : sourceTxt.length * 0.6;
+                            $.ajax({
+                                url: '/markov?order=5&begining=' + sourceWord + '&length=' + len + '&content=' + sourceTxt,
+                                context: document.body
+                            }).done(function (data) {
+                                generateMarkov(data, x, y, sourceWord, targetWord, info);
+                            });
+                        }
+                        else {
+                            const result1 = data1[Math.floor(Math.random() * data1.length)];
+                            const result2 = data2[Math.floor(Math.random() * data2.length)];
 
-                //             $.getJSON("search2.php?id=" + result1.id + "&wordIndex=" + result1.wordIndex, function (para1) {
-                //                 $.getJSON("search2.php?id=" + result2.id + "&wordIndex=" + result2.wordIndex, function (para2) {
+                            $.getJSON("search2.php?id=" + result1.id + "&wordIndex=" + result1.wordIndex, function (para1) {
+                                $.getJSON("search2.php?id=" + result2.id + "&wordIndex=" + result2.wordIndex, function (para2) {
 
-                //                     //console.log('paragraphs '+para1.length+' '+para2.length);
+                                    //console.log('paragraphs '+para1.length+' '+para2.length);
 
-                //                     const length = Math.round((para1[0].body.length + para2[0].body.length) / 2);
+                                    const length = Math.round((para1[0].body.length + para2[0].body.length) / 2);
 
 
-                //                     $.ajax({
-                //                         url: 'markov.php?order=5&begining=' + sourceWord + '&length=' + length + '&content=' + para1[0].body + ' ' + para2[0].body,
-                //                         context: document.body
-                //                     }).done(function (data) {
-                //                         generateMarkov(data, x, y, sourceWord, targetWord, info);
-                //                     });
-                //                 });
-                //             });
-                //         }
-                //     });
-                // });
+                                    $.ajax({
+                                        url: '/markov?order=5&begining=' + sourceWord + '&length=' + length + '&content=' + para1[0].body + ' ' + para2[0].body,
+                                        context: document.body
+                                    }).done(function (data) {
+                                        generateMarkov(data, x, y, sourceWord, targetWord, info);
+                                    });
+                                });
+                            });
+                        }
+                    });
+                });
                 info.source.css('color', '#F00');
                 info.target.css('color', '#F00');
             }
@@ -111,7 +107,7 @@ $(function () {
                 }
 
                 $.ajax({
-                    url: 'markov.php?order=' + order + '&begining=' + info.source.text() + '&length=' + length + '&content=' + sourceTxt + ' ' + targetTxt,
+                    url: '/markov?order=' + order + '&begining=' + info.source.text() + '&length=' + length + '&content=' + sourceTxt + ' ' + targetTxt,
                     context: document.body
                 }).done(function (data) {
                     var textCont = "<div class='" + color + "_text_cont'>..." + data + "...</div>";
@@ -143,7 +139,7 @@ $(function () {
         jsPlumb.bind("jsPlumbConnectionDetached", function (info) {
             info.source.css('color', '#666');
             info.target.css('color', '#666');
-
+            console.log(info)
             var grid = blueTexts[info.source];
             grid.window.close();
         });

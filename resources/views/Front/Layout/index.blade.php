@@ -35,8 +35,8 @@
     <title>@yield('title', 'machine for making sense')</title>
 
     <!-- Styles -->
+    {{-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> --}}
     <link rel="stylesheet" href="{{ mix('css/machine.css') }}">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Scripts -->
     <script src="{{ mix('js/machine/vendor.js') }}"></script>

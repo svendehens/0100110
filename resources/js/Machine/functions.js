@@ -117,8 +117,9 @@ function openWriteBox() {
                 $(wnd.getContainer().find('.write_note_box')[0]).css('height', height + 'px');
             }
         });
-        writingBox.getHeader().find('.minimizeImg').css('display', 'block');
-        writingBox.getHeader().find('.closeImg').css('display', 'none');
+        // writingBox.getHeader().find('.minimizeImg').css('display', 'block');
+        // writingBox.getHeader().find('.closeImg').css('display', 'none');
+        $('.window_function_bar').css('display', 'block');
     }
     else {
         if (writingBox.isMinimized()) {
@@ -163,7 +164,6 @@ function search(searchBox) {
         return false;
 
     searchByTerm(term);
-
     openWriteBox();
 
     setTimeout(function () {
@@ -220,18 +220,17 @@ function searchByTerm(term) {
         author = term.substring(0, term.indexOf(',')).trim();
         term = term.substring(term.indexOf(',') + 1).trim();
     }
-    // searchCallback(data, term)
-    // $.getJSON("search_all2.php?keyword=" + term + "&author=" + author, searchCallback(term));
-    // $(searchBox.offsetParent).find('.change_to_note').css('display','none');
+    $.getJSON("search-all?keyword=" + term + "&author=" + author, searchCallback(term));
+
     // $.getJSON("https://api.twitter.com/1.1/search/tweets.json?lang=en&q=" + term + "&callback=?", searchTwitterCallback());
 
-    // setTimeout(function () {
-    //     searchWikiminer(term.toLowerCase());
-    // }, 2000);
+    setTimeout(function () {
+        searchWikiminer(term.toLowerCase());
+    }, 2000);
 
-    // setTimeout(function () {
-    //     thesaurusSyns(term.toLowerCase());
-    // }, 2000);
+    setTimeout(function () {
+        thesaurusSyns(term.toLowerCase());
+    }, 2000);
 
     suggestionList = '';
 }
@@ -245,28 +244,21 @@ function searchTwitterCallback() {
 }
 
 function searchCallback(term) {
-
-    // let data = term;
-    // console.log('searchCallback', data, term)
     return function (data) {
         var results = '';
-        if (data.length == 0)
+        if (data === null)
             results = 'No results';
-        var author = '';
-        //var authors;
-        var window;
-        var authorCount = 0;
-        var resultPerAuthorCount = 0;
 
+        var author = '';
         var resultsPerBox = 0;
         var ignoredResults = 0;
         var acceptedResults = 0;
         var boxCount = 0;
 
-        var ratio = data.length > MAX_SEARCH_RESULTS ? MAX_SEARCH_RESULTS / data.length : 1;
+        var ratio = data && data.length > MAX_SEARCH_RESULTS ? MAX_SEARCH_RESULTS / data.length : 1;
 
         $.each(data, function (i, item) {
-            console.log('callback each data', item)
+            // console.log('callback each data', item)
             var result = '';
             result = result + '<li>' + item.author + ', ' + item.title;
             result = result + '<input type="hidden" id="search_result_hidden_index" value="' + item.wordIndex + '"/>';
@@ -278,7 +270,6 @@ function searchCallback(term) {
                 }
                 else {
                     if (Math.random() < 1) {
-
                         results = results + result;
                         acceptedResults++;
                         resultsPerBox++;
@@ -297,20 +288,15 @@ function searchCallback(term) {
             author = item.author;
 
             if (resultsPerBox > MAX_RESULTS_PER_BOX || ignoredResults + acceptedResults == data.length) {
-                //console.log(resultsPerBox+' max: ' +MAX_RESULTS_PER_BOX);
                 results = '<div class="window_container"><div class="result_container"><ul class="results_box">' + results + '</ul></div></div>';
 
                 var height = WINDOW_HEIGHT + Math.random() * 40;
-
                 var windowX = boxCount * (WINDOW_WIDTH) * .91 + (searchCount % 2) * WINDOW_WIDTH / 2 + 10;
-
                 var windowY = 55 + Math.random() * 30 - 15 + (searchCount % 4) * 100;
 
                 if (windowX + WINDOW_WIDTH + 20 > $(document).width()) {
-
                     windowY += 50;
                     windowX = windowX % $(document).width();
-
                 }
 
                 var grid = openWindow(windowX, windowY, 2000, WINDOW_WIDTH, height, results, '', 'search_container', true);
@@ -323,69 +309,62 @@ function searchCallback(term) {
             }
 
         });
-        //	var thisWindow =  $(searchBox).parents('.window_container');
-
-        //	$(thisWindow).find('.results_box').html(results);
-        if (data.length > 0)
+        if (data && data.length > 0)
             searchCount++;
 
         $('.search_box')[0].value = '';
-
-        $('.write_container .write_note_box').focus();
-
+        $('.write_container .write_note_box').trigger('focus');
     }
 }
 
 function search_result(result, article_id, wordIndex, term) {
+    var target = result.parentNode.parentNode;
 
-    var target = result.parentNode.parentNode; //.parentNode;
-    $.getJSON("search2.php?id=" + article_id + "&wordIndex=" + wordIndex, searchResultCallback($(target), term, (wordIndex == -1) ? true : false));
+    $.getJSON("search?id=" + article_id + "&wordIndex=" + wordIndex, searchResultCallback($(target), term, (wordIndex == -1) ? true : false));
 
     texts_opened++;
     $('.window_frame #hint_message').fadeOut(500);
     $('.window_frame #hint_message').text('');
 
     if (texts_opened == 1) {
-
         setTimeout(function () {
             if (texts_opened == 1) {
                 writeHintMessage(2);
             }
         }, 5000);
-
     }
-
     if (texts_opened == 2 && synths_made == 0) {
-
         setTimeout(function () {
             if (synths_made == 0) {
                 writeHintMessage(3);
             }
         }, 5000);
-
     }
-
-
-    //result.parentNode.parentNode.parentNode.innerHTML = $('#desc_window .window_container').html();
     return false;
 }
 
 function searchResultCallback(target, term, largeText) {
     return function (data) {
-
         var dataItem = data[0];
         var result = '';
-        var body = dataItem.body;
+        var body = dataItem.content;
         var divclass = 'text_section';
         if (largeText) {
             divclass = divclass + ' large_text_section';
         }
         body.replace(/â€™/g, '\'')
 
-        // todo correct item.autor
-
-        result = '<div class="' + divclass + '"><h2><a href="#" onclick="list_titles(this,\'' + term + '\',\'' + dataItem.author + '\');return false;">' + dataItem.author + '</a>, <a href="#" onclick="search_result(this,' + dataItem.id + ',-1,\'' + term + '\');return false">' + dataItem.title + '</a></h2><div class="wikify_slider"></div><p>' + body + '</p></div>';
-        var container = $(target).parents('.window_panel');//parent().parent().parent().parent();
+        result = `
+            <div class="${divclass}">
+                <h2>
+                    <a href="#" onclick="list_titles(this,\'${term}\',\'${dataItem.author}\');return false;">${dataItem.author}</a>
+                    , <a href="#" onclick="search_result(this,${dataItem.id},-1,\'${term}\');return false">${dataItem.name}</a>
+                </h2>
+                <div class="wikify_slider"></div>
+                <p>${body}</p>
+            </div>
+        `;
+        var container = $(target).parents('.window_panel');
         var top = $(container).position().top;
         var left = $(container).position().left;
         createWindow(left, top, result, term);
@@ -401,11 +380,8 @@ function createWindow(left, top, result, term) {  // top and left are the origin
     if (left + WINDOW_WIDTH > $(document).width()) {
         left = left - 2 * WINDOW_WIDTH;
     }
-
     var grid = openWindow(left, top, 2000, WINDOW_WIDTH, WINDOW_HEIGHT, result, '', 'result_box', true);
-
     var window = grid.window;
-
     var lineHeight = (12 + openedTextCount % 3) + 'px';
     openedTextCount++;
 
@@ -445,11 +421,12 @@ function createWindow(left, top, result, term) {  // top and left are the origin
         if (linksMade < 3) {
             $("#" + window.getContainer().attr('id') + " .highlight").attr('title', 'drag to any other anchor word to link');
             $('._jsPlumb_endpoint').attr('title', 'drag to any other anchor word to link');
+            // $('.jtk-endpoint').attr('title', 'drag to any other anchor word to link');
         }
         else if (linksMade >= 3) {
             $(".highlight").attr('title', '');
             $('._jsPlumb_endpoint').attr('title', '');
-
+            // $('.jtk-endpoint').attr('title', '');
         }
         jsPlumb.draggable(window.getContainer());
 
@@ -502,11 +479,12 @@ function wikifyCallback(data, target) {
     if (linksMade < 3) {
         $("#" + window.attr('id') + " .wm_wikifiedLink").attr('title', 'drag to any other anchor word to synthesize');
         $('._jsPlumb_endpoint').attr('title', 'drag to any other anchor word to synthesize');
+        // $('.jtk-endpoint').attr('title', 'drag to any other anchor word to synthesize');
     }
     else if (linksMade >= 3) {
         $(".highlight").attr('title', '');
         $('._jsPlumb_endpoint').attr('title', '');
-
+        // $('.jtk-endpoint').attr('title', '');
     }
 
     target.find('.wm_wikifiedLink').click(function (event) {
@@ -537,19 +515,19 @@ function queryWikipediaApiById(x, y, pageId) {
 function openWikiWindow(data, x, y, pageId) {
     var rawWiki = data.query.search[0].snippet;
     var plainWiki = txtwiki.parseWikitext(rawWiki);
-    console.log('plainwiki:', plainWiki)
+
     // plainWiki = plainWiki.substring(0, plainWiki.indexOf('=='));
     plainWiki = plainWiki.replace(/{{(.*?)}}/g, '');
     // plainWiki = plainWiki.lastIndexOf('}}') > 0 ? plainWiki.substring(plainWiki.lastIndexOf('}}') + 2) : plainWiki;
     // plainWiki = plainWiki.lastIndexOf('(disambiguation)') > 0 ? plainWiki.substring(plainWiki.lastIndexOf('(disambiguation)') + 15) : plainWiki;
     // plainWiki=plainWiki.replace(/|(.*?)|/g,'');
-    console.log('plainwiki clean:', plainWiki)
 
     var result = `<div class="wikify_slider"></div>
         <div class="text_section">
           <h2>${data.query.search[0].title}</h2>
           <p>${plainWiki}</p>
         </div>`;
+
     //var grid =openWindow(x,y,2000, WINDOW_WIDTH, WINDOW_HEIGHT , plainWiki ,  '', 'wiki_box');
     if (x == 0 && y == 0) {
         x = 20 + Math.random() * 200;
@@ -557,7 +535,6 @@ function openWikiWindow(data, x, y, pageId) {
     }
     writeHintMessage(data.query.search[0].title);
     setTimeout(function () {
-        // console.log('remove eliza');
         if (showTextBusy == '') {
             $('.window_frame #hint_message').text('');
         }
@@ -575,20 +552,19 @@ function searchResultNewBox(chck, position) {
     //$(descriptionWindow[windowIndex-1].getFrame()).find('.change_to_note').css('display','none');
     newGrid.changeMode('search_result');
     var target = descriptionWindow[windowIndex - 1].getFrame().find('ul');
-    $.getJSON("search2.php?id=" + article_id + "", searchResultCallback(target));
+    $.getJSON("search?id=" + article_id + "", searchResultCallback(target));
     //descriptionWindow[windowIndex-1]
 }
 
 function list_titles(result, term, author) {
     //alert(result.nextElementSibling.value);
-
     //todo pass word and index to searchResultCallback
-
     //var grid = getGridForElement(result);
     //grid.changeMode('search_result');
 
     var target = result.parentNode.parentNode;//.parentNode;
-    $.getJSON("list.php", listTitlesCallback($(target), term, author));
+    console.log('accessing list titles')
+    // $.getJSON("list.php", listTitlesCallback($(target), term, author));
 
     //result.parentNode.parentNode.parentNode.innerHTML = $('#desc_window .window_container').html();
     return false;
@@ -596,7 +572,6 @@ function list_titles(result, term, author) {
 
 function listTitlesCallback(target, term, author) {
     return function (data) {
-
         var result = '<ul class="title_list">';
         var prevAuthor = '';
         $.each(data, function (index, value) {
@@ -605,14 +580,12 @@ function listTitlesCallback(target, term, author) {
                 prevAuthor = value.author;
                 anchor = '<a name="' + value.author + '"/>';
             }
-            result += '<li>' + anchor + value.author + ', <a href="#" onclick="search_result(this,' + value.id + ',-1,\'' + term + '\');return false">' + value.title + '</a></li>';
+            result += '<li>' + anchor + value.author + ', <a href="#" onclick="search_result(this,' + value.id + ',-1,\'' + term + '\');return false">' + value.name + '</a></li>';
 
         });
         result += '</ul>';
 
         var container = $(target).parents('.window_panel');
-
-
         var top = $(container).position().top + Math.random() * 20;
         var left = $(container).position().left;
 
@@ -624,14 +597,11 @@ function listTitlesCallback(target, term, author) {
             left = left - 2 * WINDOW_WIDTH;
         }
         var grid = openWindow(left, top, 2000, WINDOW_WIDTH, WINDOW_HEIGHT, result, '', 'result_box', true);
-
         scrollToAnchor(author, $(grid.window.getContainer()).find('.window_frame'), grid.window.getContainer().attr('id'));
-        //var window = grid.window;
     };
 }
 
 function thesaurusSyns(term) {
-
     $.getJSON(THES_JSON + term + '/json', function (data) {
         var suggestions_html = '';
         var index = 0;
@@ -644,12 +614,10 @@ function thesaurusSyns(term) {
                     index++;
                 }
             });
-
         }
         if (suggestionList.length > 0) {
             suggestionList += '<li>&nbsp;</li>';
         }
-
         suggestionList += suggestions_html;
         $('.write_container .suggestions').html('<ul class="wiki_suggestions">' + suggestionList + '</ul>');
     });
@@ -674,8 +642,6 @@ function processArticleJSON(url, term) {
         },
         xhrFields: { withCredentials: true },
         success: function (data) {
-            console.log('processArticleJSON:', data)
-            console.log('processArticleJSON snippet:', data.query.search[0].snippet)
             openWikiWindow(data, 0, 0, data.query.search[0].pageid);
         }
     });
@@ -699,7 +665,6 @@ function processArticleJSON(url, term) {
         suggestionList += suggestions_html;
 
         $('.write_container .suggestions').html('<ul class="wiki_suggestions">' + suggestionList + '</ul>');
-
     });
 }
 
