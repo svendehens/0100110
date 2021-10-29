@@ -18,11 +18,10 @@ class SearchController extends Controller
         $word = $request->keyword ?? null;
         $id = $request->id ?? null;
         $wordIndex = $request->wordIndex ?? null;
-        $searchTerm = $request->searchTerm ?? null;
 
         if ($word) {
             $articles = Project::select('id', 'name', 'content', 'author')->selectRaw(
-                "MATCH(name, content) AGAINST('$word' IN NATURAL LANGUAGE MODE) AS score"
+                "MATCH(name, content) AGAINST('$word') AS score"
             )->selectRaw(
                 "CONCAT_WS(
 				' ',
@@ -43,30 +42,34 @@ class SearchController extends Controller
 				)) AS sentence"
             )
                 ->whereRaw("INSTR(content, '$word')> 0")
-                ->orderBy('score')
+                ->orderByDesc('score')
                 ->get();
         } elseif ($id) {
             $articles = Project::where('id', $id)->get();
+        } else {
+            return false;
         }
 
-        $rows = null;
+        $rows = array();
         foreach ($articles as $r) {
 
             if ($wordIndex != null && $wordIndex != 'undefined' && $wordIndex != -1) {
                 // trim result
                 $fullBody = $r['content'];
                 $words = explode(" ", $fullBody);
+                // dd($words);
                 $wordCount = 0;
                 $before = '';
                 $after = '';
                 $i = 1;
                 $numberOfBreaks = 0;
-                $currentWord = $words[$wordIndex];
-                while ($numberOfBreaks < 1 && $i < 200) {
+                $currentWord = $words[$wordIndex + $i];
+
+                while ($numberOfBreaks < 1 && $i < 100) {
                     if ($this->hasNewLine($currentWord)) {
                         $firstBreak = strrpos($currentWord, "\\n");
                         $currentWord = substr($currentWord, $firstBreak);
-                        if ($i > 20) {   // to make sure there are at least 40 words
+                        if ($i > 40) {   // to make sure there are at least 40 words
                             $numberOfBreaks++;
                         }
                     }
@@ -83,7 +86,7 @@ class SearchController extends Controller
                     if ($this->hasNewLine($currentWord)) {
                         $lastBreak = strrpos($currentWord, "\\n", -1);
                         $currentWord = substr($currentWord, 0, $lastBreak);
-                        if ($i > 10) {   // to make sure there are at least 40 words
+                        if ($i > 40) {   // to make sure there are at least 40 words
                             $numberOfBreaks++;
                         }
                     }

@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('content')->nullable();
+            $table->mediumText('content')->nullable();
             $table->text('author')->nullable();
             $table->string('slug');
             $table->boolean('status')->default(true);

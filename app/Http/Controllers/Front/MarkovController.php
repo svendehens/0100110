@@ -13,13 +13,13 @@ class MarkovController extends Controller
      */
     public function index(ApiRequest $request)
     {
-        $content = $request->content ?? null;
-        $order = $request->order ?? 5;
+        $text = $request->content ?? null;
+        $look_forward = $request->order ?? 1;
         $length = $request->length ?? 200;
         $begining = $request->begining ?? null;
 
-        $markov_table = $this->generate_markov_table($content, $order);
-        $markov = $this->generate_markov_text($length, $markov_table, $order, $begining);
+        $markov_table = $this->generate_markov_table($text, $look_forward);
+        $markov = $this->generate_markov_text($length, $markov_table, $look_forward, $begining);
 
         echo $markov;
     }
@@ -45,6 +45,7 @@ class MarkovController extends Controller
                 $table[$char_index][$char_count] = 1;
             }
         }
+        // var_dump($table);
         return $table;
     }
 
@@ -58,7 +59,9 @@ class MarkovController extends Controller
             $char = array_rand($table);
             $ppi = 1;
         }
-
+        // dd($table);
+        // $char = $table[$char] ?? null ?: array_rand($table); // double check if key exists in markov table
+        // dd($char);
         $o = $char;
 
         for ($i = 0; $i < ($length / $look_forward); $i++) {

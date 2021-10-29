@@ -74,8 +74,13 @@ class SearchAllController extends Controller
 
             for ($i = 0; $i < count($strings); $i++) {
                 $row = array(
-                    "id" => $id, "title" => $title, "author" => $author, "score" => $score, "sentence" => $strings[$i]['sentence'],
-                    "index" => $strings[$i]['index'], "wordIndex" => $strings[$i]['wordIndex']
+                    "id" => $id,
+                    "title" => $title,
+                    "author" => $author,
+                    "score" => $score,
+                    "sentence" => $strings[$i]['sentence'],
+                    "index" => $strings[$i]['index'],
+                    "wordIndex" => $strings[$i]['wordIndex']
                 );
                 $rows[] = $row;
             }
@@ -111,7 +116,7 @@ class SearchAllController extends Controller
             $hasSecondWord = false;
             $index = $keys[$keyCount];
 
-            for ($i = $index + 4; $i < $index + 30; $i++) {
+            for ($i = $index; $i < $index + 20; $i++) {
                 if ($i > 0 && $words[$i] == $secondWord) {
                     $hasSecondWord = true;
                 }
@@ -120,7 +125,11 @@ class SearchAllController extends Controller
 
             if (strlen($secondWord) == 0 || $hasSecondWord == true) {
                 $string = str_replace(array("\\r\\n", "\\r", "\\n", "\\"), " ", $string);
-                $results[] = array("index" => $keyCount, "wordIndex" => $index, "sentence" => '...' . $string . '...');
+                $results[] = array(
+                    "index" => $keyCount,
+                    "wordIndex" => $index,
+                    "sentence" => '...' . $string . '...'
+                );
             }
         }
 

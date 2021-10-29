@@ -1,8 +1,8 @@
 {
-    "/js/app.js": "/js/app.js?id=0480b9781127681bf953",
-    "/js/machine/vendor.js": "/js/machine/vendor.js?id=e65e98015efe2cba59d2",
-    "/css/machine.css": "/css/machine.css?id=14690ce004429d3487cd",
-    "/css/app.css": "/css/app.css?id=f6db21df2057673e2dd7",
-    "/js/machine/app.js": "/js/machine/app.js?id=0f474f199a93cf49de94",
-    "/js/machine/jquery.window.min.js": "/js/machine/jquery.window.min.js?id=c46b69202d452332980d"
+    "/js/app.js": "/js/app.js",
+    "/js/machine/vendor.js": "/js/machine/vendor.js",
+    "/css/machine.css": "/css/machine.css",
+    "/css/app.css": "/css/app.css",
+    "/js/machine/app.js": "/js/machine/app.js",
+    "/js/machine/jquery.window.min.js": "/js/machine/jquery.window.min.js"
 }
