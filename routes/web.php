@@ -23,10 +23,10 @@ use App\Http\Controllers\Admin\SectionController;
 */
 
 Route::get('/tweet', function() {
-    $consumer_key = "vTRxzTPHlUpuQh91ozH7hLUp8";
-    $consumer_secret = "wJZFDjM85a0xSwxSnrQma0fIirJBwG5OkYQHy9LHFgDCUNNwKQ";
-    $access_token = "1447450910494445572-60d2Wy5Gl4sblEqfXaV8GvpBBwRIb3";
-    $access_token_secret = "G6bV1dHZtgQFYauhp61R2K4nMoUsrbWlikQz3Yl3q5Mfp";
+    $consumer_key = env('TWITTER_CONSUMER_KEY');
+    $consumer_secret = env('TWITTER_CONSUMER_SECRET');
+    $access_token = env('TWITTER_ACCESS_TOKEN');
+    $access_token_secret = env('TWITTER_ACCESS_TOKEN_SECRET');
 
     $connection = new Abraham\TwitterOAuth\TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
     $credentials = $connection->get("account/verify_credentials");

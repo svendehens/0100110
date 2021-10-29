@@ -1,2 +1,2 @@
-const machine = '😃 and others';
-console.log('machine :>> ', machine);
+const machineActive = '😃';
+console.log('machine ready :>> ', machineActive);
