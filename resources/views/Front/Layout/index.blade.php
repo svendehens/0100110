@@ -39,8 +39,8 @@
     <link rel="stylesheet" href="{{ mix('css/machine.css') }}">
 
     <!-- Scripts -->
-    <script src="{{ mix('js/machine/vendor.js') }}"></script>
-    <script src="{{ mix('js/machine/jquery.window.min.js') }}"></script>
+    {{-- <script src="{{ mix('js/machine/vendor.js') }}"></script>
+    <script src="{{ mix('js/machine/jquery.window.min.js') }}"></script> --}}
 </head>
 
 <body>

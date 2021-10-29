@@ -1,8 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/machine_original/vendor.js": "/js/machine_original/vendor.js",
+    "/js/machine/app.js": "/js/machine/app.js",
     "/css/machine.css": "/css/machine.css",
     "/css/app.css": "/css/app.css",
-    "/js/machine/app.js": "/js/machine/app.js",
-    "/js/machine/jquery.window.min.js": "/js/machine/jquery.window.min.js"
+    "/js/machine_original/app.js": "/js/machine_original/app.js",
+    "/js/machine_original/jquery.window.min.js": "/js/machine_original/jquery.window.min.js"
 }

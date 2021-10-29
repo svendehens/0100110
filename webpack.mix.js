@@ -19,7 +19,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('tailwindcss'),
     ])
     .js(['resources/js/Machine_original/vendor.js', 'resources/js/Machine_original/jquery.jsPlumb-1.3.16-all.js'], 'public/js/machine_original/vendor.js')
-    .js('resources/js/Machine/app.js', 'public/js')
+    .js('resources/js/Machine/app.js', 'public/js/machine')
     .combine([
         'resources/js/Machine_original/utils.js',
         'resources/js/Machine_original/app.js',
@@ -31,8 +31,8 @@ mix.js('resources/js/app.js', 'public/js').vue()
         'resources/js/Machine_original/jquery.highlight-3.js',
         'resources/js/Machine_original/jquery.ba-dotimeout.min.js',
         'resources/js/Machine_original/jquery.jscrollpane.min.js',
-    ], 'public/js/machine/app.js')
-    .copy('resources/js/Machine_original/jquery.window.min.js', 'public/js/machine')
+    ], 'public/js/machine_original/app.js')
+    .copy('resources/js/Machine_original/jquery.window.min.js', 'public/js/machine_original')
     .postCss('resources/css/machine.css', 'public/css', [
         require('postcss-import'),
     ])
