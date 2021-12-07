@@ -41,6 +41,10 @@
     <!-- Scripts -->
     {{-- <script src="{{ mix('js/machine/vendor.js') }}"></script>
     <script src="{{ mix('js/machine/jquery.window.min.js') }}"></script> --}}
+
+    <script src="{{ mix('js/vendor/vendor.js') }}" defer></script>
+    <script src="{{ mix('js/vendor/main.js') }}" defer></script>
+    <script src="{{ mix('js/machine/app.js') }}" defer></script>
 </head>
 
 <body>
@@ -48,8 +52,6 @@
 
     @yield('content')
 
-
-    <script src="{{ mix('js/machine/app.js') }}"></script>
 </body>
 
 </html>

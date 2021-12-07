@@ -18,21 +18,19 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('postcss-import'),
         require('tailwindcss'),
     ])
-    .js(['resources/js/Machine_original/vendor.js', 'resources/js/Machine_original/jquery.jsPlumb-1.3.16-all.js'], 'public/js/machine_original/vendor.js')
-    .js('resources/js/Machine/app.js', 'public/js/machine')
+    .combine(['resources/js/Machine/utils.js', 'resources/js/Machine/functions.js', 'resources/js/Machine/app.js'], 'public/js/machine/app.js')
+    .js(['resources/js/vendor/vendor.js'], 'public/js/vendor/vendor.js')
     .combine([
-        'resources/js/Machine_original/utils.js',
-        'resources/js/Machine_original/app.js',
-        'resources/js/Machine_original/functions.js',
-        'resources/js/Machine_original/grid.js',
-        'resources/js/Machine_original/txtwiki.js',
-        'resources/js/Machine_original/dragscrollable.js',
-        'resources/js/Machine_original/wikify.js',
-        'resources/js/Machine_original/jquery.highlight-3.js',
-        'resources/js/Machine_original/jquery.ba-dotimeout.min.js',
-        'resources/js/Machine_original/jquery.jscrollpane.min.js',
-    ], 'public/js/machine_original/app.js')
-    .copy('resources/js/Machine_original/jquery.window.min.js', 'public/js/machine_original')
+        'resources/js/vendor/grid.js',
+        'resources/js/vendor/txtwiki.js',
+        'resources/js/vendor/dragscrollable.js',
+        'resources/js/vendor/wikify.js',
+        'resources/js/vendor/jquery.highlight-3.js',
+        'resources/js/vendor/jquery.ba-dotimeout.min.js',
+        'resources/js/vendor/jquery.jscrollpane.min.js',
+        'resources/js/vendor/jquery.window.min.js',
+        'resources/js/vendor/jquery.jsPlumb-1.3.16-all.js'
+    ], 'public/js/vendor/main.js')
     .postCss('resources/css/machine.css', 'public/css', [
         require('postcss-import'),
     ])

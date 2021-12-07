@@ -24,7 +24,7 @@ const HINT_MESSAGE_1 = ['well, waiting got you this far, but not much further, s
     , 'which of the excerpts above look promising to you? click on it.'];
 
 const HINT_MESSAGE_2 = ["this is the paragraph which hosted the excerpt.." +
-    "now, find another text. if theres nothing that looks attractive, try scrolling through any of the columns of examples til you find one and click on that.",
+    "now, find another text. if there's nothing that looks attractive, try scrolling through any of the columns of examples 'til you find one and click on that.",
     "find another text fragment that looks promising. click.",
     "now click on another text that seems interesting."];
 

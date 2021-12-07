@@ -1,9 +1,8 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/machine_original/vendor.js": "/js/machine_original/vendor.js",
-    "/js/machine/app.js": "/js/machine/app.js",
-    "/css/machine.css": "/css/machine.css",
-    "/css/app.css": "/css/app.css",
-    "/js/machine_original/app.js": "/js/machine_original/app.js",
-    "/js/machine_original/jquery.window.min.js": "/js/machine_original/jquery.window.min.js"
+    "/js/app.js": "/js/app.js?id=0480b9781127681bf953",
+    "/js/vendor/vendor.js": "/js/vendor/vendor.js?id=f88fd427f858894a1455",
+    "/css/machine.css": "/css/machine.css?id=015a343f845e34d21b01",
+    "/css/app.css": "/css/app.css?id=f6db21df2057673e2dd7",
+    "/js/machine/app.js": "/js/machine/app.js?id=64e10652b4c520484452",
+    "/js/vendor/main.js": "/js/vendor/main.js?id=35df66bd07df8cf83585"
 }

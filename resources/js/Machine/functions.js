@@ -71,8 +71,9 @@ var showText = function (target, message, index, interval, input) {
 
 function addSelectionToBox() {
     var selectedText = getSelectedText();
-    var text = $.trim($('.window_container .write_note_box').val());
-    text = text + " " + selectedText;
+    var note_val = $('.window_container .write_note_box').val();
+    var text = String(note_val).trim();
+    text = `${text} ${selectedText}`;
     $('.window_container .write_note_box').val(text);
 }
 

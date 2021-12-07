@@ -29,11 +29,28 @@ Route::get('/tweet', function() {
     $access_token_secret = env('TWITTER_ACCESS_TOKEN_SECRET');
 
     $connection = new Abraham\TwitterOAuth\TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
+    $connection->setApiVersion('2');
     $credentials = $connection->get("account/verify_credentials");
 
-    $results = $connection->get("search/tweets", ["q" => "search", "tweet_mode" => "extended"]);
+    // -birthday leaves the word out of the tweet
+    // in this sense, the app could have things to leave in and out by default
+    // for example a random list of phrases or words to which the client search param would be added
+    // like, the word birthday could explictly be added
+    // also the results from the thesaures could be added to the OR list
+    // search OR hint OR ...
+    // could also have the searched word with a hashtag
+    // array rand
+    $results = $connection->get("tweets/search/recent", [
+        "query" => '"come" (happy OR happiness) -birthday -is:retweet'
+    ]);
 
     return $results;
+
+    if($results->data ?? null)
+        return $results;
+    else {
+        return "no results";
+    }
     foreach($results->statuses as $status)
     {
         echo $status->full_text . "<br><br><br>";

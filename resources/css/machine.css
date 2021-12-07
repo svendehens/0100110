@@ -219,6 +219,11 @@ a:visited {
     margin: 0 auto;
 }
 
+.search_box:focus {
+    outline: 1px;
+    background: red;
+}
+
 input {
     border: 1px solid black;
     font-size: 11px;
